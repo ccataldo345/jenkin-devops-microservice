@@ -22,16 +22,20 @@ pipeline {
 		}
 		stage("Compile") {
 			steps {
+				echo "mvn clean compile"
 				sh "mvn clean compile"
 			}
 		}
 		stage("Test") {
 			steps {
+				echo "mvn test"
 				sh "mvn test"
 			}
 		}
 		stage("Integration Test") {
 			steps {
+				// Integration Test in Maven uses "maven-failsafe-plugin"
+				echo "mvn failsafe:integration-test failsafe:verify"
 				sh "mvn failsafe:integration-test failsafe:verify"
 			}
 		}
